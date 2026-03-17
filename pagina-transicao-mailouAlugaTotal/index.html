@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evoluímos!</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        /* --- BASE DESKTOP ULTRA-WIDE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #212529;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .site-header {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .migration-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 4rem;
+            margin-top: 5rem;
+        }
+
+        .node-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .node {
+            width: 140px;
+            height: 140px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .node img.node-logo {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .node:hover img.node-logo {
+            transform: scale(1.1);
+        }
+
+        .path-container {
+            flex-grow: 1;
+            min-height: 100px;
+            margin: 0 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .static-line {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 2px;
+            position: absolute;
+        }
+
+        .central-badges {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 650px;
+            z-index: 20;
+            transform: translateY(-160px);
+        }
+
+        .magnetic-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid rgba(103, 88, 157, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: orbitalFluid 3s infinite ease-in-out, badge-shadow-dynamic 2.5s infinite linear;
+        }
+
+        .magnetic-label span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: badge-color-dynamic 2.5s infinite linear;
+        }
+
+        @keyframes badge-color-dynamic {
+
+            0%,
+            45% {
+                background: #0783e5;
+                box-shadow: 0 0 6px #0783e5;
+            }
+
+            55%,
+            100% {
+                background: #8236c0;
+                box-shadow: 0 0 6px #8236c0;
+            }
+        }
+
+        @keyframes badge-shadow-dynamic {
+
+            0%,
+            45% {
+                box-shadow: 0 4px 12px rgba(41, 145, 170, 0.12);
+            }
+
+            55%,
+            100% {
+                box-shadow: 0 4px 12px rgba(130, 54, 192, 0.12);
+            }
+        }
+
+        @keyframes orbitalFluid {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .traveler {
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: cyber-journey 2.5s infinite linear;
+        }
+
+        .traveler-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top-color: currentColor;
+            border-bottom-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+
+        .traveler-core {
+            width: 12px;
+            height: 12px;
+            background-color: currentColor;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .node-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .text-supply {
+            color: #0783e5;
+        }
+
+        .text-store {
+            color: #67589d;
+        }
+
+        .message-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #003D7A;
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #67589d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(103, 88, 157, 0.3);
+        }
+
+        .btn-action:hover {
+            background: #554885;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(103, 88, 157, 0.4);
+        }
+
+        @keyframes cyber-journey {
+            0% {
+                left: 0%;
+                color: #0783e5;
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            45% {
+                color: #0783e5;
+            }
+
+            55% {
+                color: #8236c0;
+            }
+
+            95% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                color: #8236c0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- BLOCO EXCLUSIVO NOTEBOOK V15 (REAJUSTADO PARA FICAR MAIOR) --- */
+        @media screen and (max-height: 800px) and (min-width: 901px) {
+            .site-header {
+                top: 25px;
+                left: 40px;
+            }
+
+            .brand-logo {
+                height: 48px;
+            }
+
+            .container {
+                padding-top: 15px;
+            }
+
+            .migration-visual {
+                margin-top: 35px;
+                margin-bottom: 25px;
+            }
+
+            /* Aumentei os logos para não parecerem "perdidos" */
+            .node {
+                width: 125px;
+                height: 125px;
+            }
+
+            .node-label {
+                font-size: 1.1rem;
+            }
+
+            /* Desci os badges para não ficarem colados e aumentei levemente */
+            .central-badges {
+                transform: translateY(-115px);
+                gap: 12px;
+                max-width: 600px;
+            }
+
+            .magnetic-label {
+                padding: 8px 16px;
+                font-size: 10px;
+            }
+
+            .message-title {
+                font-size: 1.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .message-text {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-action {
+                padding: 0.8rem 2.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* --- VERSÃO MOBILE (IMUTÁVEL) --- */
+        @media (max-width: 900px) {
+            body {
+                display: block;
+                padding: 20px 0;
+            }
+
+            .site-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 40px;
+            }
+
+            .container {
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .migration-visual {
+                flex-direction: column;
+                gap: 40px;
+                margin-top: 0;
+                margin-bottom: 40px;
+            }
+
+            .path-container {
+                display: none;
+            }
+
+            .central-badges {
+                position: static;
+                transform: none;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .magnetic-label {
+                white-space: normal;
+                text-align: center;
+                max-width: 320px;
+            }
+
+            .message-title,
+            .message-text {
+                text-align: center;
+            }
+
+            .node {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="/">
+            <img src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/b156a978-fb7e-44af-8c67-4aeadded2169/Arquivos/Empresas/69989d3317080ec8f91cd598.png"
+                alt="Logotipo Mailou" class="brand-logo">
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="migration-visual">
+            <div class="node-wrapper">
+                <div class="node origin">
+                    <img src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/b156a978-fb7e-44af-8c67-4aeadded2169/Arquivos/Empresas/69b861f3a9773cae0e17de90.png"
+                        alt="Logo Supply" class="node-logo">
+                </div>
+                <div class="node-label text-supply">.AlugaTotal</div>
+            </div>
+
+            <div class="path-container">
+                <div class="static-line"></div>
+                <div class="central-badges">
+                    <div class="magnetic-label"><span></span> Pague como mensalidade</div>
+                    <div class="magnetic-label"><span></span> Logística completa</div>
+                    <div class="magnetic-label"><span></span> Gestão de ativos</div>
+                    <div class="magnetic-label"><span></span> Manutenção para seu equipamento</div>
+                    <div class="magnetic-label"><span></span> Suporte especializado</div>
+                </div>
+                <div class="traveler">
+                    <div class="traveler-ring"></div>
+                    <div class="traveler-core"></div>
+                </div>
+            </div>
+
+            <div class="node-wrapper">
+                <div class="node destination">
+                    <a href="https://store.mailou.com.br/Categoria/68ed721865715f949016ad29/LOCA%C3%87%C3%95ES"
+                        target="_blank">
+                        <img src="https://s3-sa-east-1.amazonaws.com/files-sc.sigecloud.com.br/Producao/b156a978-fb7e-44af-8c67-4aeadded2169/Arquivos/Empresas/69984da69649322779d78f2c.png"
+                            alt="Logo Store" class="node-logo">
+                    </a>
+                </div>
+                <div class="node-label text-store">.Store</div>
+            </div>
+        </div>
+
+        <h1 class="message-title">Para melhorar sua experiência mudamos!</h1>
+        <p class="message-text">Nossa plataforma evoluiu para uma estrutura mais robusta e rápida. Clique no botão
+            abaixo para conhecer o nosso novo ambiente</p>
+
+        <a href="https://store.mailou.com.br/Categoria/68ed721865715f949016ad29/LOCA%C3%87%C3%95ES" class="btn-action"
+            target="_blank">Explorar o Novo Ambiente</a>
+    </div>
+
+</body>
+
+</html>
